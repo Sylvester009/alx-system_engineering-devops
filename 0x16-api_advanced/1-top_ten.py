@@ -4,6 +4,8 @@
 '''
 import requests
 from sys import argv
+
+
 def top_ten(subreddit):
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     headers = {'User-Agent': 'Mozilla/5.0'}
