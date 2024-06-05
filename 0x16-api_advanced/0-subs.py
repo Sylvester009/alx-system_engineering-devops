@@ -1,31 +1,27 @@
 #!/usr/bin/python3
 """
-0. How many subs?
+number of subscribers for a given subreddit
 """
 
 from requests import get
 
+
 def number_of_subscribers(subreddit):
     """
-    Function that queries the Reddit API and returns the number of subscribers
+    function that queries the Reddit API and returns the number of subscribers
     (not active users, total subscribers) for a given subreddit.
     """
-    # Check if the subreddit is valid
+
     if subreddit is None or not isinstance(subreddit, str):
         return 0
 
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
+    response = get(url, headers=user_agent)
+    results = response.json()
 
-    response = get(url, headers=headers, allow_redirects=False)
-    if response.status_code == 200:
-        data = response.json()
-        return data['data']['subscribers']
-    else:
+    try:
+        return results.get('data').get('subscribers')
+
+    except Exception:
         return 0
-
-# Ensure the function prints the result for testing
-if __name__ == "__main__":
-    import sys
-    subreddit = sys.argv[1]
-    print(number_of_subscribers(subreddit))
