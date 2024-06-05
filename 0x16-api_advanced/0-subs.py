@@ -16,3 +16,10 @@ def number_of_subscribers(subreddit):
         return data['data']['subscribers']
     else:
         return 0
+
+
+# Ensure the function prints the result for testing
+if __name__ == "__main__":
+    import sys
+    subreddit = sys.argv[1]
+    print(number_of_subscribers(subreddit))
