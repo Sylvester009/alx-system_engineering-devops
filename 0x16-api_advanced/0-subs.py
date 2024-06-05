@@ -15,11 +15,17 @@ def number_of_subscribers(subreddit):
         return 0
 
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+    headers = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
 
-    response = get(url, headers=user_agent, allow_redirects=False)
+    response = get(url, headers=headers, allow_redirects=False)
     if response.status_code == 200:
         data = response.json()
         return data['data']['subscribers']
     else:
         return 0
+
+# Ensure the function prints the result for testing
+if __name__ == "__main__":
+    import sys
+    subreddit = sys.argv[1]
+    print(number_of_subscribers(subreddit))
