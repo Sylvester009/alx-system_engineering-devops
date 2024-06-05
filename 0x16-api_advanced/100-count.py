@@ -6,6 +6,7 @@ queries the Reddit API recursively.
 
 import requests
 
+
 def count_words(subreddit, word_list, after='', word_dict={}):
     if not word_dict:
         for word in word_list:
